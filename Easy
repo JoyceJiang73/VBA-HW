@@ -1,0 +1,30 @@
+Sub Stock()
+For Each ws In Worksheets
+
+LastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+Ticker = 2
+
+For i = 1 To LastRow
+
+If ws.Cells(i + 1, 1).Value = ws.Cells(i, 1).Value Then
+ws.Cells(Ticker, 9).Value = ws.Cells(i + 1, 1).Value
+ws.Cells(Ticker, 10).Value = ws.Cells(Ticker, 10).Value + ws.Cells(i + 1, 7).Value
+
+Else
+
+Ticker = Ticker + 1
+
+ws.Cells(Ticker, 9).Value = ws.Cells(i + 1, 1).Value
+ws.Cells(Ticker, 10).Value = ws.Cells(i + 1, 7).Value
+
+End If
+
+Next i
+
+ws.Range("I1") = "Ticker"
+ws.Range("J1") = "Total Stock Volume"
+
+Next ws
+
+End Sub
